@@ -1,3 +1,4 @@
+// Your code here
 function createEmployeeRecord(src) {
   let employee = {};
   employee.firstName = src[0];
@@ -60,4 +61,10 @@ function allWagesFor(employee) {
 function calculatePayroll(employees) {
   let payroll = employees.reduce(function(memo, employee) {return memo + allWagesFor(employee)}, 0);
   return payroll;
+}
+
+function findEmployeeByFirstName(employees, firstName) {
+  let findEmployee = function(employee) {if (employee.firstName === firstName) {return employee}}
+  let employeeObject = employees.find(findEmployee);
+  return employeeObject;
 }
