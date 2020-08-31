@@ -40,7 +40,9 @@ function createTimeOutEvent(employee, dateTimeString) {
 }
 
 function hoursWorkedOnDate(employee, date) {
-  let hoursWorked = (employee.timeOutEvents[0].hour - employee.timeInEvents[0].hour)/100;
+  let timeIn = employee.timeInEvents.find(function(timeInEvent) {if (date === timeInEvent.date) {return timeInEvent.hour}})
+  let timeOut = employee.timeOutEvents.find(function(timeInEvent) {if (date === timeInEvent.date) {return timeInEvent.hour}})
+  let hoursWorked = (timeOut - timeIn)/100;
   return hoursWorked;
 }
 
