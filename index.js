@@ -50,9 +50,7 @@ function wagesEarnedOnDate(employee, date) {
 }
 
 function allWagesFor(employee) {
-  let allWages = 0;
-  employee.timeInEvents.forEach ( function(timeInEvent) {
-    allWages += wagesEarnedOnDate(employee, timeInEvent.date);
-  })
-  return allWages;
+  let eligibleDates = employee.timeInEvents.map(function (e) {return e.date})
+  let payable = eligibleDates.reduce(function(memo, date) {return memo + wagesEarnedOnDate(employee, date)}, 0);
+  return payable;
 }
