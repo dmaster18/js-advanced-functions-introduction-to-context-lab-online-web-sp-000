@@ -56,3 +56,8 @@ function allWagesFor(employee) {
   let payable = eligibleDates.reduce(function(memo, date) {return memo + wagesEarnedOnDate(employee, date)}, 0);
   return payable;
 }
+
+function calculatePayroll(employees) {
+  let payroll = employees.reduce(function(memo, employee) {return memo + allWagesFor(employee)});
+  return payroll;
+}
