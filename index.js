@@ -1,4 +1,3 @@
-// Your code here
 function createEmployeeRecord(src) {
   let employee = {};
   employee.firstName = src[0];
@@ -40,8 +39,9 @@ function createTimeOutEvent(employee, dateTimeString) {
 }
 
 function hoursWorkedOnDate(employee, date) {
-  let timeIn = employee.timeInEvents.find(function(timeInEvent) {if (date === timeInEvent.date) {return timeInEvent.hour}})
-  let timeOut = employee.timeOutEvents.find(function(timeInEvent) {if (date === timeInEvent.date) {return timeInEvent.hour}})
+  let findHour = function(timeEvent) {if (date === timeEvent.date) {return timeEvent;}}
+  let timeIn = employee.timeInEvents.find(findHour).hour;
+  let timeOut = employee.timeOutEvents.find(findHour).hour;
   let hoursWorked = (timeOut - timeIn)/100;
   return hoursWorked;
 }
