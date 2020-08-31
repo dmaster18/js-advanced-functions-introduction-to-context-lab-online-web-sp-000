@@ -1,1 +1,58 @@
 // Your code here
+function createEmployeeRecord(src) {
+  let employee = {};
+  employee.firstName = src[0];
+  employee.familyName = src[1];
+  employee.title = src[2];
+  employee.payPerHour = src[3];
+  employee.timeInEvents = [];
+  employee.timeOutEvents = [];
+  return employee;
+}
+
+function createEmployeeRecords(src) {
+  let employees = [];
+  for (let i = 0; i < src.length; i++) {
+    let employee = createEmployeeRecord(src[i]);
+    employees.push(employee);
+  }
+  return employees;
+}
+
+function createTimeInEvent(employee, dateTimeString) {
+  let dateTimeArray = dateTimeString.split(" ");
+  let timeIn = {};
+  employee.timeInEvents.push(timeIn);
+  timeIn.date = dateTimeArray[0];
+  timeIn.hour = parseInt(dateTimeArray[1]);
+  timeIn.type = "TimeIn";
+  return employee;
+}
+
+function createTimeOutEvent(employee, dateTimeString) {
+  let dateTimeArray = dateTimeString.split(" ");
+  let timeOut = {};
+  employee.timeOutEvents.push(timeOut);
+  timeOut.date = dateTimeArray[0];
+  timeOut.hour = parseInt(dateTimeArray[1]);
+  timeOut.type = "TimeOut";
+  return employee;
+}
+
+function hoursWorkedOnDate(employee, date) {
+  let hoursWorked = (employee.timeOutEvents[0].hour - employee.timeInEvents[0].hour)/100;
+  return hoursWorked;
+}
+
+function wagesEarnedOnDate(employee, date) {
+  let wagesEarned = hoursWorkedOnDate(employee, date)*employee.payPerHour;
+  return wagesEarned;
+}
+
+function allWagesFor(employee) {
+  let allWages = 0;
+  employee.timeInEvents.forEach ( function(timeInEvent) {
+    allWages += wagesEarnedOnDate(employee, timeInEvent.date);
+  })
+  return allWages;
+}
